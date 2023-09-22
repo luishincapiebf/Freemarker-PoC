@@ -38,18 +38,14 @@ public class CertificateService {
                 configuration
         );
 
-        // Process the template and generate PDF
-        StringWriter stringWriter = new StringWriter();
-
-        // Create dataModel
+        //DataModel
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("logo", "https://placehold.co/200x25/F1F1F1/000?text=Blankfactor&font=raleway");
+        dataModel.put("logo", "https://placehold.co/300x70/F1F1F1/000?text=Blankfactor&font=raleway");
 
         Map<String, Object> certificate = new HashMap<>();
         certificate.put("expeditionDate", "2021-01-01");
         certificate.put("addressedTo", "Mike Doe");
-        certificate.put("withSalary", false);
-
+        certificate.put("withSalary", true);
 
         dataModel.put("certificate", certificate);
 
@@ -71,9 +67,10 @@ public class CertificateService {
 
         dataModel.put("signer", signer);
 
+        StringWriter stringWriter = new StringWriter();
         template1.process(dataModel, stringWriter);
 
-        // Create a PDF document using iText
+        //iText
         ByteArrayOutputStream pdfOutputStream = new ByteArrayOutputStream();
         Document document = new Document();
         PdfWriter.getInstance(document, pdfOutputStream);
